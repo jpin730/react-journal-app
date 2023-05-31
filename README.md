@@ -1,6 +1,6 @@
 # React Journal App
 
-This little app is for React Redux fundamentals y Firebase Integration (Authentication, CRUD Database and Cloud Storage).
+This little app is for Material UI usage, React Redux fundamentals y Firebase Integration (Authentication, CRUD Database and Cloud Storage).
 
 ## Usage
 
