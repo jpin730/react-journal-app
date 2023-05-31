@@ -1,3 +1,10 @@
+import { HashRouter } from "react-router-dom";
+import { AppRouter } from "./router/AppRouter";
+
 export const JournalApp = () => {
-  return <h1>React Journal App</h1>;
+  return (
+    <HashRouter>
+      <AppRouter />
+    </HashRouter>
+  );
 };
