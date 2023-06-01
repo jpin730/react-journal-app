@@ -27,11 +27,19 @@ export const JournalLayout = ({ children }) => {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, overflowWrap: "anywhere" }}
+        sx={{
+          height: "100vh",
+          display: "flex",
+          flexGrow: 1,
+          flexDirection: "column",
+          overflowWrap: "anywhere",
+        }}
       >
         <Toolbar />
 
-        {children}
+        <Box p={3} sx={{ flexGrow: 1 }}>
+          {children}
+        </Box>
       </Box>
     </Box>
   );
