@@ -28,7 +28,7 @@ export const JournalLayout = ({ children }) => {
       <Box
         component="main"
         sx={{
-          height: "100vh",
+          minHeight: "100vh",
           display: "flex",
           flexGrow: 1,
           flexDirection: "column",
