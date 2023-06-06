@@ -1,4 +1,10 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 import { firebaseAuth } from "./config";
 
@@ -12,13 +18,43 @@ export const signInWithGoogle = async () => {
 
     return { ok: true, displayName, email, photoURL, uid };
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
     return {
       ok: false,
-      errorCode,
-      errorMessage,
+      errorMessage: error.message,
+    };
+  }
+};
+
+export const registerUserWithEmailAndPassword = async ({
+  email,
+  password,
+  displayName,
+}) => {
+  try {
+    const {
+      user: { photoURL, uid },
+    } = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+    await updateProfile(firebaseAuth.currentUser, { displayName });
+    return { ok: true, displayName, email, photoURL, uid };
+  } catch (error) {
+    return {
+      ok: false,
+      errorMessage: error.message,
+    };
+  }
+};
+
+export const loginWithEmailAndPassword = async ({ email, password }) => {
+  try {
+    const {
+      user: { displayName, photoURL, uid },
+    } = await signInWithEmailAndPassword(firebaseAuth, email, password);
+
+    return { ok: true, displayName, email, photoURL, uid };
+  } catch (error) {
+    return {
+      ok: false,
+      errorMessage: error.message,
     };
   }
 };

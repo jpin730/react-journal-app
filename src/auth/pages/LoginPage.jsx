@@ -1,4 +1,11 @@
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Google } from "@mui/icons-material";
 import { useMemo } from "react";
@@ -7,14 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   AUTH_STATUS,
-  checkingAuthentication,
   startGoogleSignIn,
+  startLoginWithEmailAndPassword,
 } from "../../store";
 import { AuthLayout } from "../layouts";
 import { useForm } from "../../hooks";
 
 export const LoginPage = () => {
-  const { status } = useSelector((state) => state.auth);
+  const { status, errorMessage } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -30,7 +37,7 @@ export const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(checkingAuthentication(email, password));
+    dispatch(startLoginWithEmailAndPassword({ email, password }));
   };
 
   const onGoogleSignIn = () => {
@@ -66,6 +73,11 @@ export const LoginPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+            {!!errorMessage && (
+              <Grid item xs={12}>
+                <Alert severity="error">{errorMessage}</Alert>
+              </Grid>
+            )}
             <Grid item xs={12} sm={6}>
               <Button
                 fullWidth
