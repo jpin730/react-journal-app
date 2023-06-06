@@ -7,8 +7,17 @@ import {
   Typography,
 } from "@mui/material";
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+
+import { startLogout } from "../../store";
 
 export const NavBar = ({ drawerWidth, handleDrawerToggle }) => {
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(startLogout());
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -38,6 +47,7 @@ export const NavBar = ({ drawerWidth, handleDrawerToggle }) => {
             color="inherit"
             endIcon={<LogoutOutlined />}
             sx={{ textTransform: "none" }}
+            onClick={onLogout}
           >
             Logout
           </Button>

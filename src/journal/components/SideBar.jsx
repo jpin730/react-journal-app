@@ -9,13 +9,21 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import { TurnedInNot } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 
 export const SideBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
+  const { displayName } = useSelector((state) => state.auth);
+
   const drawerContent = (
     <>
-      <Toolbar />
+      <Toolbar>
+        <Typography variant="h6" noWrap component="div">
+          {displayName}
+        </Typography>
+      </Toolbar>
       <Divider />
       <List>
         {["Jan", "Feb", "Mar", "Apr"].map((text) => (
