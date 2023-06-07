@@ -20,15 +20,17 @@ import {
 import { AuthLayout } from "../layouts";
 import { useForm } from "../../hooks";
 
+const formData = {
+  email: "user@email.com",
+  password: "123456",
+};
+
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm({
-    email: "user@email.com",
-    password: "123456",
-  });
+  const { email, password, onInputChange } = useForm(formData);
 
   const isAuthenticating = useMemo(
     () => status === AUTH_STATUS.checking,
