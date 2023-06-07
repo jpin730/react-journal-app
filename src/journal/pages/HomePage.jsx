@@ -15,11 +15,11 @@ export const HomePage = () => {
         size="small"
         sx={{
           position: "fixed",
-          right: 50,
-          bottom: 50,
+          right: { xs: 15, sm: 40 },
+          bottom: { xs: 10, sm: 30 },
         }}
       >
-        <AddCircleOutlined sx={{ fontSize: 60 }} />
+        <AddCircleOutlined sx={{ fontSize: 75 }} />
       </IconButton>
     </JournalLayout>
   );
