@@ -1,11 +1,20 @@
+import {
+  DeleteOutlined,
+  SaveOutlined,
+  UploadOutlined,
+} from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef } from "react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 
-import { setActiveNote, startSaveNote, startUploadingFiles } from "../../store";
+import {
+  setActiveNote,
+  startDeletingNote,
+  startSaveNote,
+  startUploadingFiles,
+} from "../../store";
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks";
 
@@ -45,9 +54,16 @@ export const NoteView = () => {
     dispatch(startSaveNote(formState));
   };
 
-  const onFileInputChange = ({ target: { files } }) => {
-    dispatch(startUploadingFiles(files));
+  const onFileInputChange = ({ target }) => {
+    if (target.files.length === 0) return;
+    dispatch(startUploadingFiles(target.files));
+    target.files = new DataTransfer().files;
   };
+
+  const onDelete = () => {
+    dispatch(startDeletingNote());
+  };
+
   return (
     <>
       <Grid
@@ -89,6 +105,16 @@ export const NoteView = () => {
             onClick={onSaveNote}
           >
             Save
+          </Button>
+
+          <Button
+            color="error"
+            size="large"
+            startIcon={<DeleteOutlined />}
+            disabled={isSaving}
+            onClick={onDelete}
+          >
+            Delete
           </Button>
         </Grid>
       </Grid>

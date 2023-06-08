@@ -6,6 +6,9 @@ export const SideBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
   const { displayName } = useSelector((state) => state.auth);
   const { notes } = useSelector((state) => state.journal);
 
+  const sortedNotes = [...notes];
+  sortedNotes.sort((a, b) => +(a.title > b.title) || -1);
+
   const drawerContent = (
     <>
       <Toolbar>
@@ -15,7 +18,7 @@ export const SideBar = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => {
       </Toolbar>
       <Divider />
       <List>
-        {notes.map((note) => (
+        {sortedNotes.map((note) => (
           <SideBarItem key={note.id} {...note} />
         ))}
       </List>
