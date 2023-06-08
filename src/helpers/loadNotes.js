@@ -5,7 +5,7 @@ import { firestoreDB } from "../firebase";
 export const loadNotes = async (uid = "") => {
   if (!uid) throw new Error("User UID doesn't exist");
 
-  const collectionRef = collection(firestoreDB, `${uid}/journal/notes`);
+  const collectionRef = collection(firestoreDB, uid);
   const docs = await getDocs(collectionRef);
 
   const notes = [];
