@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 
 import { setActiveNote } from "../../store/journal/journalSlice";
 
-export const SideBarItem = ({ id, title, body, date }) => {
+export const SideBarItem = ({ id, title, body, date, imageUrls = [] }) => {
   const dispatch = useDispatch();
 
   const titleMaxLength = 20;
@@ -34,7 +34,7 @@ export const SideBarItem = ({ id, title, body, date }) => {
   );
 
   const onClickNote = () => {
-    dispatch(setActiveNote({ id, title, body, date }));
+    dispatch(setActiveNote({ id, title, body, date, imageUrls }));
   };
 
   return (
