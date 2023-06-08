@@ -64,12 +64,17 @@ export const startSaveNote = () => {
 };
 
 export const startUploadingFiles = (files = []) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(setSaving());
+
+    const { uid } = getState().auth;
+    const {
+      active: { id },
+    } = getState().journal;
 
     const fileUploadPromises = [];
     for (const file of files) {
-      fileUploadPromises.push(fileUpload(file));
+      fileUploadPromises.push(fileUpload(file, uid, id));
     }
 
     const photosUrls = await Promise.all(fileUploadPromises);
