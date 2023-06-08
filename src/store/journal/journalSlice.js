@@ -13,6 +13,12 @@ export const journalSlice = createSlice({
       state.notes.push(payload);
       state.isSaving = false;
     },
+    clearNotesOnLogout: (state) => {
+      state.isSaving = false;
+      state.messageSaved = "";
+      state.notes = [];
+      state.active = null;
+    },
     deleteNote: () => {},
     setActiveNote: (state, { payload }) => {
       state.active = payload;
@@ -44,6 +50,7 @@ export const journalSlice = createSlice({
 
 export const {
   addNewEmptyNote,
+  clearNotesOnLogout,
   deleteNote,
   savingNewNote,
   setActiveNote,

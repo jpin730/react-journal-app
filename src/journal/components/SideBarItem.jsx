@@ -15,7 +15,7 @@ export const SideBarItem = ({ id, title, body, date, imageUrls = [] }) => {
   const dispatch = useDispatch();
 
   const titleMaxLength = 20;
-  const bodyMaxLength = 45;
+  const bodyMaxLength = 40;
 
   const newTitle = useMemo(
     () =>
