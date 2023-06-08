@@ -26,7 +26,7 @@ export const startNewNote = () => {
       imageUrls: [],
     };
 
-    const newDoc = doc(collection(firestoreDB, `${uid}/journal/notes`));
+    const newDoc = doc(collection(firestoreDB, uid));
     await setDoc(newDoc, newNote);
 
     newNote.id = newDoc.id;
@@ -57,7 +57,7 @@ export const startSaveNote = () => {
 
     const { id, ...noteToUpdate } = note;
 
-    const docRef = doc(firestoreDB, `${uid}/journal/notes/${id}`);
+    const docRef = doc(firestoreDB, `${uid}/${id}`);
     await setDoc(docRef, noteToUpdate, { merge: true });
 
     dispatch(updateNote(note));
@@ -97,7 +97,7 @@ export const startDeletingNote = () => {
     const memoRef = doc(collection(firestoreDB, `deleted`), id);
     await setDoc(memoRef, { uid });
 
-    const docRef = doc(firestoreDB, `${uid}/journal/notes/${id}`);
+    const docRef = doc(firestoreDB, `${uid}/${id}`);
     await deleteDoc(docRef);
 
     dispatch(deleteNote(id));
