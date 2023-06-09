@@ -18,7 +18,7 @@ cloudinary.config({
 });
 
 describe("fileUpload", () => {
-  test("should upload file successfully", async () => {
+  test.only("should upload file successfully", async () => {
     const imageUrl = "https://placehold.co/400";
     const imageBlob = await (await fetch(imageUrl)).blob();
     const imageFile = new File([imageBlob], "test-image.svg");
@@ -27,14 +27,16 @@ describe("fileUpload", () => {
     const testId = "test-id";
     const url = await fileUpload(imageFile, testUid, testId);
 
-    const imageName = url.split("/").pop();
-    const imageId =
-      imageName.substr(0, imageName.lastIndexOf(".")) || imageName;
-
     expect(typeof url).toBe("string");
     expect(url.startsWith("https://")).toBe(true);
 
-    await cloudinary.api.delete_resources([`${testUid}/${testId}/${imageId}`]);
+    const { resources } = await cloudinary.api.resources({
+      prefix: testUid,
+      type: "upload",
+    });
+    const public_ids = resources.map(({ public_id }) => public_id);
+    if (!public_ids.length) return;
+    await cloudinary.api.delete_resources(public_ids);
     await cloudinary.api.delete_folder(testUid);
   });
 
