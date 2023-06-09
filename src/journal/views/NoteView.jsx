@@ -82,6 +82,7 @@ export const NoteView = () => {
           <input
             multiple
             type="file"
+            accept="image/*"
             onChange={onFileInputChange}
             style={{ display: "none" }}
             ref={fileInputRef}
