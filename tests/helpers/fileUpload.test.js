@@ -2,13 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 import { fileUpload } from "../../src/helpers/fileUpload";
 
-jest.mock("../../src/helpers/env", () => {
-  const { VITE_CLOUDINARY_UPLOAD_PRESET, VITE_CLOUDINARY_URL } = process.env;
-  return {
-    VITE_CLOUDINARY_URL,
-    VITE_CLOUDINARY_UPLOAD_PRESET,
-  };
-});
+jest.mock("../../src/helpers/env", () => ({ ...process.env }));
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
