@@ -11,9 +11,6 @@ import { startNewNote } from "../../../src/store/journal/thunks";
 // TO RUN THESE TESTS:
 // DISABLE READ/WRITE PERMISSIONS IN FIRESTORE
 
-jest.mock("../../../src/helpers", () => {});
-jest.mock("../../../src/firebase/env", () => ({ ...process.env }));
-
 describe("journal/thunks", () => {
   const dispatch = jest.fn();
   const getState = jest.fn();

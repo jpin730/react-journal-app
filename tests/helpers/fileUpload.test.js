@@ -2,8 +2,6 @@ import { v2 as cloudinary } from "cloudinary";
 
 import { fileUpload } from "../../src/helpers/fileUpload";
 
-jest.mock("../../src/helpers/env", () => ({ ...process.env }));
-
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -12,7 +10,7 @@ cloudinary.config({
 });
 
 describe("fileUpload", () => {
-  test.only("should upload file successfully", async () => {
+  test("should upload file successfully", async () => {
     const imageUrl = "https://placehold.co/400";
     const imageBlob = await (await fetch(imageUrl)).blob();
     const imageFile = new File([imageBlob], "test-image.svg");

@@ -17,13 +17,7 @@ import {
 import { clearNotesOnLogout } from "../../../src/store/journal/journalSlice";
 import { testUser } from "../../fixtures/authFixtures";
 
-jest.mock("../../../src/firebase", () => ({
-  VITE_FIREBASE_API_KEY: "",
-  VITE_FIREBASE_AUTH_DOMAIN: "",
-  VITE_FIREBASE_PROJECT_ID: "",
-  VITE_FIREBASE_STORAGE_BUCKET: "",
-  VITE_FIREBASE_MESSAGING_SENDER_ID: "",
-  VITE_FIREBASE_APP_ID: "",
+jest.mock("../../../src/firebase/providers", () => ({
   signInWithGoogle: jest.fn(),
   loginWithEmailAndPassword: jest.fn(),
   logoutFirebase: jest.fn(),
