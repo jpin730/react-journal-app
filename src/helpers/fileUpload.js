@@ -6,7 +6,7 @@ export const fileUpload = async (file, uid, id) => {
   const formData = new FormData();
   formData.append("upload_preset", VITE_CLOUDINARY_UPLOAD_PRESET);
   formData.append("file", file);
-  formData.append("public_id_prefix", `${uid}/${id}`);
+  formData.append("public_id_prefix", `react-journal-app/${uid}/${id}`);
 
   try {
     const response = await fetch(VITE_CLOUDINARY_URL, {
